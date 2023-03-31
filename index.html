@@ -8,137 +8,139 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
-    [data-theme="light"] {
-      --bg-color-1: #EE9CA7;
-      --bg-color-2: #FDC830;
-      --bg-color-3: #9fd8df;
-      --text-color: #111827;
-      --bg-window: #ffffff;
-      --text-inverse: #ffffff;
+    .bg-light-gradient {
+      background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
     }
 
-    [data-theme="dark"] {
-      --bg-color-1: #45454d;
-      --bg-color-2: #45454d;
-      --bg-color-3: #45454d;
-      --text-color: #d1d5db;
-      --bg-window: #1f2937;
-      --text-inverse: #111827;
+    .bg-dark-gradient {
+      background-color: #454545;
     }
 
-    @keyframes gradient {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+    [data-theme="dark"] .bg-white {
+      background-color: #2d2d2d;
+      color: #f1f1f1;
     }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-image: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3));
-      background-size: 600% 600%;
-      animation: gradient 60s ease infinite;
-      transition: background 0.5s;
+    [data-theme="dark"] .text-gray-700 {
+      color: #f1f1f1;
     }
 
-    .bg-gradient::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: inherit;
-      filter: blur(var(--blur));
-      z-index: -1;
+    [data-theme="dark"] .border-gray-300 {
+      border-color: #4a4a4a;
     }
 
-    .bg-window {
-      background-color: var(--bg-window);
-      transition: background-color 0.5s;
+    [data-theme="dark"] .focus:border-indigo-600 {
+      border-color: #7e3af2;
     }
 
-    .text-color {
-      color: var(--text-color);
-      transition: color 0.5s;
+    #results {
+      transition: all 0.3s ease-in-out;
+      opacity: 0;
+      transform: translateY(-1rem);
     }
 
-    .text-inverse {
-      color: var(--text-inverse);
-      transition: color 0.5s;
+    #results.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    [data-theme="dark"] .input-dark-mode {
+  background-color: #4a4a4a;
+  color: #f1f1f1;
+  border-color: #4a4a4a;
     }
 
-    button:focus {
-      outline: none;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      transition: transform 0.3s ease;
+    [data-theme="dark"] .input-dark-mode:focus {
+      border-color: #7e3af2;
     }
   </style>
 </head>
-  <body class="bg-gradient">
+
+<body class="bg-light-gradient">
   <div class="container mx-auto py-10 px-4">
     <div class="flex justify-end">
-      <button id="themeToggle" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-1 px-3 rounded mb-4 flex items-center justify-center">
+      <button id="themeToggle" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold p-2 rounded mb-4 flex items-center justify-center">
         <svg viewBox="0 0 512 512" width="20" title="moon" fill="#ffffff">
           <path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z" />
         </svg>
       </button>
     </div>
-    <h1 class="text-3xl font-semibold mb-6 text-center text-color">Number Percentage Calculator</h1>
-    <div class="bg-window p-8 rounded-lg shadow-md">
+    <div class="bg-white p-8 rounded-lg shadow-md">
+      <h1 class="text-2xl font-semibold mb-4">Scrap Percentage Calculator</h1>
       <div class="mb-4">
-        <label for="inputNumber" class="block text-sm font-medium text-color">Enter a number:</label>
-        <input type="number" id="inputNumber" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-      </div>
-      <button id="calculate" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">Calculate</button>
-      <div id="results" class="mt-6 space-y-4 hidden">
-        <div class="text-sm text-color">
-          <strong>5%:</strong> <span id="result1" class="font-mono"></span>
-        </div>
-        <div class="text-sm text-color">
-          <strong>2.5%:</strong> <span id="result2" class="font-mono"></span>
-        </div>
-        <div class="text-sm text-color">
-          <strong>1.25%:</strong> <span id="result3" class="font-mono"></span>
-        </div>
-      </div>
+        <label class="block text-gray-700 mb-2" for="inputNumber">How much scrap do you have?</label>
+        <input class="w-full border border-gray-300 py-2 px-3 text-gray-700 rounded focus:outline-none focus:border-indigo-600 input-dark-mode" type="number" id="inputNumber" placeholder="Enter a number">
     </div>
+    <button id="calculate" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">Calculate</button>
+    <button id="explanationButton" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded mt-2">Show Explanation</button>
+      <div id="results" class="mt-4">
+        <p class="flex items-center">
+          Bet on 5: <span id="result1" class="font-semibold ml-1"></span>
+          <img src="https://cdn.discordapp.com/attachments/513692113935007756/1091489367706578944/latest.png" class="ml-1" style="width: 16px; height: 16px;" />
+        </p>
+        <p class="flex items-center">
+          Bet on 10: <span id="result2" class="font-semibold ml-1"></span>
+          <img src="https://cdn.discordapp.com/attachments/513692113935007756/1091489367706578944/latest.png" class="ml-1" style="width: 16px; height: 16px;" />
+        </p>
+        <p class="flex items-center">
+          Bet on 20: <span id="result3" class="font-semibold ml-1"></span>
+          <img src="https://cdn.discordapp.com/attachments/513692113935007756/1091489367706578944/latest.png" class="ml-1" style="width: 16px; height: 16px;" />
+        </p>
+      </div>
+      <div id="explanationContainer" class="bg-white p-4 mt-4 rounded-lg shadow-md hidden">
+      <p class="mb-2">By betting on numbers 5, 10, and 20 with 5%, 2.5%, and 1.25% of your total scrap, respectively, you can significantly increase your chances of winning.</p>
+      <p>The about page provides an in-depth explanation of the strategy, including its basis on the higher hit probability of numbers within the 3-14 range (65%) compared to those outside of it (35%).</p>
+      <div class="flex justify-center">
+        <img src="https://cdn.discordapp.com/attachments/513692113935007756/1091477341294833674/Zrzut_ekranu_2023-03-31_234016.png" alt="strategy" class="w-64 mt-4">
+      </div>
   </div>
-  <script>
-    document.getElementById('calculate').addEventListener('click', function() {
-      const inputNumber = parseFloat(document.getElementById('inputNumber').value);
-      if (isNaN(inputNumber)) {
-        alert('Please enter a valid number');
-        return;
-      }
+</div>
+<script>
+  document.getElementById('calculate').addEventListener('click', function() {
+    const inputNumber = parseFloat(document.getElementById('inputNumber').value);
+    if (isNaN(inputNumber)) {
+      alert('Please enter a valid number');
+      return;
+    }
 
-      const result1 = inputNumber * 0.05;
-      const result2 = inputNumber * 0.025;
-      const result3 = inputNumber * 0.0125;
+    const result1 = Math.ceil(inputNumber * 0.05);
+    const result2 = Math.ceil(inputNumber * 0.025);
+    const result3 = Math.ceil(inputNumber * 0.0125);
 
-      document.getElementById('result1').textContent = result1.toFixed(2);
-      document.getElementById('result2').textContent = result2.toFixed(2);
-      document.getElementById('result3').textContent = result3.toFixed(2);
+    document.getElementById('result1').textContent = result1;
+    document.getElementById('result2').textContent = result2;
+    document.getElementById('result3').textContent = result3;
 
-      document.getElementById('results').classList.remove('hidden');
-    });
+    document.getElementById('results').classList.add('show');
+  });
 
-    document.getElementById('themeToggle').addEventListener('click', function() {
-      const html = document.querySelector('html');
-      const currentTheme = html.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      html.setAttribute('data-theme', newTheme);
-    });
-  </script>
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    const html = document.querySelector('html');
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    const bgGradient = document.querySelector('body');
+
+    if (isDark) {
+      html.setAttribute('data-theme', 'light');
+      bgGradient.classList.remove('bg-dark-gradient');
+      bgGradient.classList.add('bg-light-gradient');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      bgGradient.classList.remove('bg-light-gradient');
+      bgGradient.classList.add('bg-dark-gradient');
+    }
+  });
+  
+    document.getElementById('explanationButton').addEventListener('click', function() {
+    const explanationContainer = document.getElementById('explanationContainer');
+    if (explanationContainer.classList.contains('hidden')) {
+      explanationContainer.classList.remove('hidden');
+      this.textContent = 'Hide Explanation';
+    } else {
+      explanationContainer.classList.add('hidden');
+      this.textContent = 'Show Explanation';
+    }
+  });
+</script>
 </body>
-</html>
+</html>  
